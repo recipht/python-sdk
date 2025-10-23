@@ -16,15 +16,14 @@ class IngestorClient(BaseClient):
     def ingest_receipt(
         self,
         request: IngestReceiptRequest,
-        idempotency_key: Optional[str] = None
+        idempotency_key: str
     ) -> IngestReceiptResponse:
         """Ingest receipts"""
-        headers = {"Idempotency-Key": idempotency_key} if idempotency_key else None
         return self.request(
             "POST",
             "/v1/ingestor/receipts/ingest",
             data=request,
-            headers=headers,
+            headers={"Idempotency-Key": idempotency_key},
         )
 
     def get_receipt_value(
