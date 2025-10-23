@@ -2,7 +2,6 @@ from typing import Optional
 from .auth import LogtoAuthClient
 from .clients.ingestor import IngestorClient
 from .clients.normalizer import NormalizerClient
-from .clients.delivery import DeliveryClient
 
 
 class ReceiptrailClient:
@@ -28,4 +27,3 @@ class ReceiptrailClient:
 
         self.ingestor = IngestorClient(self._auth_client, base_url, timeout)
         self.normalizer = NormalizerClient(self._auth_client, base_url, timeout)
-        self.delivery = DeliveryClient(self._auth_client, base_url, timeout)
