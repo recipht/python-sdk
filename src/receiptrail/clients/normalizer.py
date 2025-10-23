@@ -14,15 +14,15 @@ class NormalizerClient(BaseClient):
 
     def process_image(self, request: ProcessImageRequest) -> ProcessImageResponse:
         """Process receipt image"""
-        return self.request("POST", "/normalizer/process/image", data=request)
+        return self.request("POST", "/v1/normalizer/process/image", data=request)
 
     def process_json(self, request: ProcessJsonRequest) -> NormalizedReceipt:
         """Process JSON receipt"""
-        return self.request("POST", "/normalizer/process/json", data=request)
+        return self.request("POST", "/v1/normalizer/process/json", data=request)
 
     def process_bulk_json(self, request: ProcessBulkJsonRequest) -> List[NormalizedReceipt]:
         """Process multiple JSON receipts"""
-        return self.request("POST", "/normalizer/process/bulk-json", data=request)
+        return self.request("POST", "/v1/normalizer/process/bulk-json", data=request)
 
     def list_receipts(
         self,
@@ -35,8 +35,8 @@ class NormalizerClient(BaseClient):
             params["skip"] = skip
         if limit is not None:
             params["limit"] = limit
-        return self.request("GET", "/normalizer/receipts", params=params)
+        return self.request("GET", "/v1/normalizer/receipts", params=params)
 
     def get_receipt(self, receipt_id: str) -> NormalizedReceipt:
         """Get receipt by ID"""
-        return self.request("GET", f"/normalizer/receipts/{receipt_id}")
+        return self.request("GET", f"/v1/normalizer/receipts/{receipt_id}")

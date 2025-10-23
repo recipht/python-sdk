@@ -22,7 +22,7 @@ class IngestorClient(BaseClient):
         headers = {"Idempotency-Key": idempotency_key} if idempotency_key else None
         return self.request(
             "POST",
-            "/ingestor/receipts/ingest",
+            "/v1/ingestor/receipts/ingest",
             data=request,
             headers=headers,
         )
@@ -38,7 +38,7 @@ class IngestorClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/ingestor/analytics/receipts/value", params=params)
+        return self.request("GET", "/v1/ingestor/analytics/receipts/value", params=params)
 
     def get_receipt_count(
         self,
@@ -51,7 +51,7 @@ class IngestorClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/ingestor/analytics/receipts/count", params=params)
+        return self.request("GET", "/v1/ingestor/analytics/receipts/count", params=params)
 
     def get_receipt_chart(
         self,
@@ -64,7 +64,7 @@ class IngestorClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/ingestor/analytics/receipts/chart", params=params)
+        return self.request("GET", "/v1/ingestor/analytics/receipts/chart", params=params)
 
     def get_ingestion_success_rate(
         self,
@@ -77,4 +77,4 @@ class IngestorClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/ingestor/analytics/ingestion/success-rate", params=params)
+        return self.request("GET", "/v1/ingestor/analytics/ingestion/success-rate", params=params)

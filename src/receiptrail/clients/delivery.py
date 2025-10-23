@@ -21,7 +21,7 @@ class DeliveryClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/delivery/analytics/deliveries/summary", params=params)
+        return self.request("GET", "/v1/delivery/analytics/deliveries/summary", params=params)
 
     def get_delivery_success_rate(
         self,
@@ -34,7 +34,7 @@ class DeliveryClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/delivery/analytics/deliveries/success-rate", params=params)
+        return self.request("GET", "/v1/delivery/analytics/deliveries/success-rate", params=params)
 
     def get_deliveries_chart(
         self,
@@ -47,4 +47,4 @@ class DeliveryClient(BaseClient):
             params["start_date"] = start_date
         if end_date:
             params["end_date"] = end_date
-        return self.request("GET", "/delivery/analytics/deliveries/chart", params=params)
+        return self.request("GET", "/v1/delivery/analytics/deliveries/chart", params=params)
