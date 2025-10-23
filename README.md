@@ -35,7 +35,7 @@ client = ReceiptrailClient(
 ### 3. Ingest Receipts
 
 ```python
-response = client.ingestor.ingest_receipt(
+response = client.ingest_receipt(
     {
         "merchant_code": "SQUARE_US",
         "location_id": "LOC_123",
@@ -69,13 +69,13 @@ response = client.ingestor.ingest_receipt(
 
 ```python
 # Process receipt image
-normalized = client.normalizer.process_image({
+normalized = client.process_image({
     "image_url": "https://example.com/receipt.jpg",
     "merchant_code": "MERCHANT_123",
 })
 
 # Process JSON receipt
-json_receipt = client.normalizer.process_json({
+json_receipt = client.process_json({
     "receipt_data": {
         "merchant_name": "Coffee Shop",
         "total_amount": 15.99,
@@ -87,27 +87,26 @@ json_receipt = client.normalizer.process_json({
 
 ## API Reference
 
-### Ingestor Client (`client.ingestor`)
+### ReceiptrailClient Methods
 
-Manage receipt ingestion.
+#### `ingest_receipt(request, idempotency_key)`
 
-#### Methods
+Ingest receipts with duplicate prevention.
 
-- **`ingest_receipt(request, idempotency_key)`** - Ingest receipts with duplicate prevention
-  - `request`: Receipt data including merchant_code, location_id, and receipts array
-  - `idempotency_key` (required): Unique key to prevent duplicate ingestion
+- `request`: Receipt data including merchant_code, location_id, and receipts array
+- `idempotency_key` (required): Unique key to prevent duplicate ingestion
 
-### Normalizer Client (`client.normalizer`)
+#### `process_image(request)`
 
-Process and normalize receipt data from various formats.
+Extract and normalize data from receipt images.
 
-#### Methods
+- `request`: { "image_url": str, "merchant_code": str }
 
-- **`process_image(request)`** - Extract and normalize data from receipt images
-  - `request`: { "image_url": str, "merchant_code": str }
+#### `process_json(request)`
 
-- **`process_json(request)`** - Normalize structured JSON receipt data
-  - `request`: { "receipt_data": dict, "merchant_code": str }
+Normalize structured JSON receipt data.
+
+- `request`: { "receipt_data": dict, "merchant_code": str }
 
 ## Configuration Options
 
@@ -148,7 +147,7 @@ idempotency_key = f"{transaction_id}-{int(time.time() * 1000)}"
 # Or use UUID
 idempotency_key = str(uuid.uuid4())
 
-client.ingestor.ingest_receipt(receipt_data, idempotency_key)
+client.ingest_receipt(receipt_data, idempotency_key)
 ```
 
 ### Error Handling
@@ -157,7 +156,7 @@ client.ingestor.ingest_receipt(receipt_data, idempotency_key)
 from requests.exceptions import HTTPError, RequestException
 
 try:
-    response = client.ingestor.ingest_receipt(data, idempotency_key)
+    response = client.ingest_receipt(data, idempotency_key)
     print('Success:', response)
 except HTTPError as error:
     # API error response
