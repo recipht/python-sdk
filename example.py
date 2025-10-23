@@ -14,7 +14,7 @@ def main():
     try:
         # Example 1: Ingest receipts
         print("Ingesting receipts...")
-        ingest_response = client.ingestor.ingest_receipt(
+        ingest_response = client.ingest_receipt(
             {
                 "merchant_code": "SQUARE_US",
                 "location_id": "LOC_123",
@@ -98,7 +98,7 @@ def main():
 
         # Example 2: Process receipt image
         print("\nProcessing receipt image...")
-        normalized_receipt = client.normalizer.process_image({
+        normalized_receipt = client.process_image({
             "image_url": "https://example.com/receipt.jpg",
             "merchant_code": "MERCHANT_123",
         })
@@ -106,7 +106,7 @@ def main():
 
         # Example 3: Process JSON receipt
         print("\nProcessing JSON receipt...")
-        json_receipt = client.normalizer.process_json({
+        json_receipt = client.process_json({
             "receipt_data": {
                 "merchant_name": "Coffee Shop",
                 "total_amount": 15.99,
