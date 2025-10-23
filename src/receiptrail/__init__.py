@@ -5,10 +5,6 @@ from .types import ReceiptrailConfig
 from .types.ingestor import (
     IngestReceiptRequest,
     IngestReceiptResponse,
-    ReceiptValueResponse,
-    ReceiptCountResponse,
-    ReceiptChartResponse,
-    SuccessRateResponse,
 )
 from .types.normalizer import (
     ProcessImageRequest,
@@ -24,10 +20,6 @@ __all__ = [
     "ReceiptrailConfig",
     "IngestReceiptRequest",
     "IngestReceiptResponse",
-    "ReceiptValueResponse",
-    "ReceiptCountResponse",
-    "ReceiptChartResponse",
-    "SuccessRateResponse",
     "ProcessImageRequest",
     "ProcessImageResponse",
     "ProcessJsonRequest",
