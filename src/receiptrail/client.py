@@ -12,7 +12,7 @@ class ReceiptrailClient:
         self,
         access_token: str,
         logto_endpoint: str = "https://dtoqr1.logto.app",
-        base_url: str = "https://api.receiptrail.ai/v1",
+        base_url: str = "https://api.receiptrail.ai",
         timeout: int = 30
     ):
         """
