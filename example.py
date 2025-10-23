@@ -112,13 +112,18 @@ def main():
         })
         print(f"Normalized receipt: {normalized_receipt}")
 
-        # Example 4: Get delivery summary
-        print("\nGetting delivery summary...")
-        delivery_summary = client.delivery.get_deliveries_summary(
-            start_date="2025-01-01",
-            end_date="2025-01-31"
-        )
-        print(f"Delivery summary: {delivery_summary}")
+        # Example 4: Process JSON receipt
+        print("\nProcessing JSON receipt...")
+        json_receipt = client.normalizer.process_json({
+            "receipt_data": {
+                "merchant_name": "Coffee Shop",
+                "total_amount": 15.99,
+                "currency": "USD",
+                "transaction_date": "2025-01-15T10:30:00Z",
+            },
+            "merchant_code": "MERCHANT_123",
+        })
+        print(f"JSON receipt: {json_receipt}")
 
     except Exception as error:
         print(f"Error: {error}")
