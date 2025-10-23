@@ -96,15 +96,7 @@ def main():
         )
         print(f"Ingest response: {ingest_response}")
 
-        # Example 2: Get receipt analytics
-        print("\nGetting receipt value...")
-        receipt_value = client.ingestor.get_receipt_value(
-            start_date="2025-01-01",
-            end_date="2025-01-31"
-        )
-        print(f"Receipt value: {receipt_value}")
-
-        # Example 3: Process receipt image
+        # Example 2: Process receipt image
         print("\nProcessing receipt image...")
         normalized_receipt = client.normalizer.process_image({
             "image_url": "https://example.com/receipt.jpg",
@@ -112,7 +104,7 @@ def main():
         })
         print(f"Normalized receipt: {normalized_receipt}")
 
-        # Example 4: Process JSON receipt
+        # Example 3: Process JSON receipt
         print("\nProcessing JSON receipt...")
         json_receipt = client.normalizer.process_json({
             "receipt_data": {
