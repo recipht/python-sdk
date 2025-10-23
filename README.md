@@ -7,7 +7,6 @@ Official Python SDK for the Receiptrail API - a digital receipt aggregation, nor
 - 🔐 **Authentication** - Secure authentication using Logto Personal Access Tokens (PAT)
 - 📥 **Receipt Ingestion** - Ingest receipts from various sources with idempotency support
 - 🔄 **Receipt Normalization** - Process and normalize receipt data from images or JSON
-- 📊 **Analytics** - Access receipt analytics
 - 📦 **Type-Safe** - Full type hint support with detailed type definitions
 - ⚡ **Token Caching** - Automatic access token caching and refresh
 
@@ -86,41 +85,17 @@ json_receipt = client.normalizer.process_json({
 })
 ```
 
-### 5. Get Analytics
-
-```python
-# Get receipt value analytics
-receipt_value = client.ingestor.get_receipt_value(
-    start_date='2025-01-01',
-    end_date='2025-01-31'
-)
-
-# Get receipt count
-receipt_count = client.ingestor.get_receipt_count(
-    start_date='2025-01-01',
-    end_date='2025-01-31'
-)
-```
-
 ## API Reference
 
 ### Ingestor Client (`client.ingestor`)
 
-Manage receipt ingestion and analytics.
+Manage receipt ingestion.
 
 #### Methods
 
 - **`ingest_receipt(request, idempotency_key)`** - Ingest receipts with duplicate prevention
   - `request`: Receipt data including merchant_code, location_id, and receipts array
   - `idempotency_key` (required): Unique key to prevent duplicate ingestion
-
-- **`get_receipt_value(start_date=None, end_date=None)`** - Get total receipt value for date range
-
-- **`get_receipt_count(start_date=None, end_date=None)`** - Get receipt count for date range
-
-- **`get_receipt_chart(start_date=None, end_date=None)`** - Get receipt chart data for visualization
-
-- **`get_ingestion_success_rate(start_date=None, end_date=None)`** - Get ingestion success rate metrics
 
 ### Normalizer Client (`client.normalizer`)
 
