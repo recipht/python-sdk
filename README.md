@@ -7,7 +7,7 @@ Official Python SDK for the Receiptrail API - a digital receipt aggregation, nor
 - 🔐 **Authentication** - Secure authentication using Logto Personal Access Tokens (PAT)
 - 📥 **Receipt Ingestion** - Ingest receipts from various sources with idempotency support
 - 🔄 **Receipt Normalization** - Process and normalize receipt data from images or JSON
-- 📊 **Analytics** - Access receipt and delivery analytics
+- 📊 **Analytics** - Access receipt analytics
 - 📦 **Type-Safe** - Full type hint support with detailed type definitions
 - ⚡ **Token Caching** - Automatic access token caching and refresh
 
@@ -66,7 +66,27 @@ response = client.ingestor.ingest_receipt(
 )
 ```
 
-### 4. Get Analytics
+### 4. Process and Normalize Receipts
+
+```python
+# Process receipt image
+normalized = client.normalizer.process_image({
+    "image_url": "https://example.com/receipt.jpg",
+    "merchant_code": "MERCHANT_123",
+})
+
+# Process JSON receipt
+json_receipt = client.normalizer.process_json({
+    "receipt_data": {
+        "merchant_name": "Coffee Shop",
+        "total_amount": 15.99,
+        "currency": "USD",
+    },
+    "merchant_code": "MERCHANT_123",
+})
+```
+
+### 5. Get Analytics
 
 ```python
 # Get receipt value analytics
@@ -75,8 +95,8 @@ receipt_value = client.ingestor.get_receipt_value(
     end_date='2025-01-31'
 )
 
-# Get delivery summary
-delivery_summary = client.delivery.get_deliveries_summary(
+# Get receipt count
+receipt_count = client.ingestor.get_receipt_count(
     start_date='2025-01-01',
     end_date='2025-01-31'
 )
@@ -112,24 +132,7 @@ Process and normalize receipt data from various formats.
   - `request`: { "image_url": str, "merchant_code": str }
 
 - **`process_json(request)`** - Normalize structured JSON receipt data
-
-- **`process_bulk_json(request)`** - Process multiple JSON receipts in bulk
-
-- **`list_receipts(skip=None, limit=None)`** - List normalized receipts with pagination
-
-- **`get_receipt(receipt_id)`** - Get specific receipt by ID
-
-### Delivery Client (`client.delivery`)
-
-Track and analyze receipt delivery status.
-
-#### Methods
-
-- **`get_deliveries_summary(start_date=None, end_date=None)`** - Get delivery summary statistics
-
-- **`get_delivery_success_rate(start_date=None, end_date=None)`** - Get delivery success rate
-
-- **`get_deliveries_chart(start_date=None, end_date=None)`** - Get delivery data for charts
+  - `request`: { "receipt_data": dict, "merchant_code": str }
 
 ## Configuration Options
 
